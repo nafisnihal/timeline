@@ -12,6 +12,7 @@ import {
 
 const Post = ({ post, user }: { post: PostType; user: UserType }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [liked, setLiked] = useState<boolean>(false);
 
   const { data: comments, isLoading: commentsLoading } = useQuery<
     CommentType[]
@@ -20,12 +21,6 @@ const Post = ({ post, user }: { post: PostType; user: UserType }) => {
     queryFn: () => fetchComments(post.id),
     enabled: isExpanded,
   });
-
-  const [liked, setLiked] = useState<boolean>(false);
-
-  const toggleLike = () => {
-    setLiked(!liked);
-  };
 
   return (
     <div className="border border-zinc-800 p-4 rounded bg-zinc-900 capitalize">
@@ -36,7 +31,7 @@ const Post = ({ post, user }: { post: PostType; user: UserType }) => {
       </div>
       <p className="mt-2 text-slate-200">{post?.body}</p>
       <button
-        onClick={toggleLike}
+        onClick={() => setLiked(!liked)}
         className={`mr-4 ${liked ? "text-red-500" : "text-indigo-500"}`}
       >
         {liked ? (
