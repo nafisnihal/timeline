@@ -31,12 +31,14 @@ const PostList = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 md:px-20 space-y-4">
-      {posts!
-        .sort((a: PostType, b: PostType) => b.id - a.id)
-        .map((post: PostType) => (
-          <Post key={post.id} post={post} user={usersMap[post.userId]} />
-        ))}
+    <div className="container mx-auto">
+      <div className="md:border-l border-zinc-800 relative px-10 md:px-20 space-y-4 md:ml-10">
+        {posts!
+          .sort((a: PostType, b: PostType) => b.id - a.id)
+          .map((post: PostType) => (
+            <Post key={post.id} post={post} user={usersMap[post.userId]} />
+          ))}
+      </div>
     </div>
   );
 };

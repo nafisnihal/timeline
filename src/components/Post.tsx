@@ -23,51 +23,57 @@ const Post = ({ post, user }: { post: PostType; user: UserType }) => {
   });
 
   return (
-    <div className="border border-zinc-800 p-4 rounded bg-zinc-900 capitalize">
-      <h2 className="text-xl font-bold text-slate-200">{post?.title}</h2>
-      <div className="flex items-center gap-2 mt-1">
-        <FaRegUserCircle className="text-indigo-500" size={14} />
-        <p className="text-sm text-slate-400">{user?.name}</p>
+    <>
+      <div className="hidden md:flex">
+        <div className=" bg-zinc-800 w-2 h-2 absolute left-0 rounded-full ml-[-5px] mt-[40px]" />
+        <div className="border-t border-zinc-800 w-20 absolute left-0 mt-[44px]" />
       </div>
-      <p className="mt-2 text-slate-200">{post?.body}</p>
-      <button
-        onClick={() => setLiked(!liked)}
-        className={`mr-4 ${liked ? "text-red-500" : "text-indigo-500"}`}
-      >
-        {liked ? (
-          <FaHeart className="text-red-500" size={20} />
-        ) : (
-          <FaRegHeart className="text-red-500" size={20} />
-        )}
-      </button>
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="mt-4 text-indigo-500 font-mono"
-      >
-        {isExpanded ? (
-          <BsChatSquareQuoteFill size={20} />
-        ) : (
-          <BsChatSquareQuote size={20} />
-        )}
-      </button>
-      {isExpanded && (
-        <div className="mt-4">
-          {commentsLoading ? (
-            <div className="text-slate-200">Loading comments...</div>
-          ) : (
-            comments?.map((comment: CommentType) => (
-              <div
-                key={comment?.id}
-                className="border-t border-slate-700 pt-2 pb-1 pl-2 mt-2 "
-              >
-                <p className="text-sm text-slate-200">{comment?.body}</p>
-                <p className="text-xs text-slate-400">- {comment?.email}</p>
-              </div>
-            ))
-          )}
+      <div className="border border-zinc-800 p-4 rounded bg-zinc-900 capitalize w-full">
+        <h2 className="text-xl font-bold text-slate-200">{post?.title}</h2>
+        <div className="flex items-center gap-2 mt-1">
+          <FaRegUserCircle className="text-indigo-500" size={14} />
+          <p className="text-sm text-slate-400">{user?.name}</p>
         </div>
-      )}
-    </div>
+        <p className="mt-2 text-slate-200">{post?.body}</p>
+        <button
+          onClick={() => setLiked(!liked)}
+          className={`mr-4 ${liked ? "text-red-500" : "text-indigo-500"}`}
+        >
+          {liked ? (
+            <FaHeart className="text-red-500" size={20} />
+          ) : (
+            <FaRegHeart className="text-red-500" size={20} />
+          )}
+        </button>
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="mt-4 text-indigo-500 font-mono"
+        >
+          {isExpanded ? (
+            <BsChatSquareQuoteFill size={20} />
+          ) : (
+            <BsChatSquareQuote size={20} />
+          )}
+        </button>
+        {isExpanded && (
+          <div className="mt-4">
+            {commentsLoading ? (
+              <div className="text-slate-200">Loading comments...</div>
+            ) : (
+              comments?.map((comment: CommentType) => (
+                <div
+                  key={comment?.id}
+                  className="border-t border-slate-700 pt-2 pb-1 pl-2 mt-2 "
+                >
+                  <p className="text-sm text-slate-200">{comment?.body}</p>
+                  <p className="text-xs text-slate-400">- {comment?.email}</p>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
