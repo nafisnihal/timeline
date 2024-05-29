@@ -1,6 +1,6 @@
 // src/services/api.ts
 import axios from "axios";
-import { Post, User, Comment } from "../types";
+import { Comment, Post, User } from "./types";
 
 const API_BASE = "https://jsonplaceholder.typicode.com";
 

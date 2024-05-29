@@ -1,7 +1,7 @@
 // src/components/PostList.tsx
 import { useQuery } from "@tanstack/react-query";
 import { fetchPosts, fetchUsers } from "../services/api";
-import { Post as PostType, User as UserType } from "../types";
+import { Post as PostType, User as UserType } from "../services/types";
 import Post from "./Post";
 
 const PostList = () => {
@@ -15,7 +15,12 @@ const PostList = () => {
     queryFn: fetchUsers,
   });
 
-  if (postsLoading || usersLoading) return <div>Loading...</div>;
+  if (postsLoading || usersLoading)
+    return (
+      <div className="container mx-auto px-20 ">
+        <h1 className="text-slate-200 text-xl">Loading...</h1>
+      </div>
+    );
 
   const usersMap = users!.reduce(
     (acc: { [key: number]: UserType }, user: UserType) => {
@@ -26,7 +31,7 @@ const PostList = () => {
   );
 
   return (
-    <div className="space-y-4">
+    <div className="container mx-auto px-4 md:px-20 space-y-4">
       {posts!
         .sort((a: PostType, b: PostType) => b.id - a.id)
         .map((post: PostType) => (
